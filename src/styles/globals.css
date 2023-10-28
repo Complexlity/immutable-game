@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.layout-grid {
+  grid-template-columns: repeat(auto-fit, 250px);
+}
+
+@font-face {
+  font-family: scoringFont;
+  src: url("../assets/ConsertaDemoRegular-2znv.ttf");
+}
+
+.main-header {
+  font-family: "Permanent Marker", cursive;
+}
+.scoring {
+  font-family: scoringFont;
+  font-size: 1.5rem;
+}
+
+.names {
+  font-family: "Raleway", sans-serif;
+}
+.card-grid {
+  grid-template-rows: max-content 1fr;
+  transition: scale ease 0.2s;
+}
+
+.card-grid:hover {
+  scale: 108.5% !important;
+}

@@ -17,18 +17,14 @@ import {
 
 export default function Page() {
   const router = useRouter()
-  const userAddress = useMyContext().userInfo.address
-
-  let address = router.query.address
-  if(!address) address = userAddress
   const [isLoading, setIsLoading] = useState(true)
-  const [nfts, setNfts] = useState({})
+  const [nfts, setNfts] = useState([])
   useEffect(() => {
     const getNfts = async () => {
       try {
-        address = "0x98b32b1771613875bdba9b6ee3b7810e4d611c25"
+  if (!router.isReady) return
+  const { address } = router.query
         const nfts = await getNftByAddress(address)
-        console.log(nfts)
         setNfts(nfts)
         setIsLoading(false)
       } catch (error) {
@@ -36,7 +32,7 @@ export default function Page() {
       }
     }
     getNfts()
-  }, [])
+  }, [router.isReady])
 
 
   if (isLoading) {
@@ -55,7 +51,9 @@ export default function Page() {
     <div className='bg-gray-800 min-h-screen text-white '>
       <AuthHeader />
       <>
-            <div className="mt-8 grid grid-cols-12 mx-auto max-w-[1000px] p-8 gap-4 justify-center">
+        {nfts.length == 0 ? <p className="text-center text-3xl">You Have No NFTs. Complete <a href="/" className="underline hover:no-underline text-amber-400">the game</a> to gain some!!</p> : null}
+        {nfts.length > 0 ? <p className="text-3xl text-center m-4">Wow!!!. You have {nfts.length} NFTs. You have what it takes to <a href="/" className="underline hover:no-underline">Win More!</a></p>: null}
+        <div className="mt-8 grid grid-cols-12 mx-auto max-w-[1000px] p-8 gap-4 justify-center">
               {
                 nfts.map((nft, index) => (
                   <NftCard nft={nft} key={index} />

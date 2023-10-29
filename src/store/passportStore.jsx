@@ -23,6 +23,7 @@ export const MyContext = createContext();
 export function MyProvider({ children }) {
   const [passportState] = useState(passportInstance ?? "");
   const [userInfo, dispatch] = useReducer(reducer, {address: null, email: null, nickname: null, idToken: null, accessToken: null})
+  const [showConfetti, setShowConfetti] = useState(true)
 
   function reducer(state, action) {
     const key = action.key
@@ -39,7 +40,7 @@ export function MyProvider({ children }) {
   }
 
   return (
-    <MyContext.Provider value={{ passportState , userInfo, dispatch }}>
+    <MyContext.Provider value={{ passportState , userInfo, dispatch, showConfetti, setShowConfetti }}>
       {children}
     </MyContext.Provider>
   );

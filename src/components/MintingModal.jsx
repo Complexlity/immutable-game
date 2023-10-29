@@ -6,9 +6,9 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDiscl
 import { useEffect, useState } from "react";
 
 
-export default function MintingModal({open, setOpen}) {
+export default function MintingModal({ open, setOpen }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-
+  const { setShowConfetti } = useMyContext()
   const [currentState, setCurrentState] = useState("");
   const userAddress = useMyContext().userInfo.address
   const [minting, setMinting] = useState(false);
@@ -34,6 +34,7 @@ export default function MintingModal({open, setOpen}) {
           console.log(tokenFetched)
           setNftItem(tokenFetched)
           setMinting(false);
+          setShowConfetti(true)
 
         } catch (error) {
           // alert("Something Went Wrong.gaa Try Again Later");
@@ -104,6 +105,8 @@ export default function MintingModal({open, setOpen}) {
                     <Button color="danger" variant="light" onPress={() => {
                       onClose()
                       setOpen(false)
+                      setShowConfetti(false)
+
                     }}>
                       Close
                     </Button>

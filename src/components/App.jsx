@@ -1,17 +1,17 @@
 "use client"
 
-import { useEffect, useState } from "react";
-import { mintNft } from "@/utils/mintNft";
-import uniqid from "uniqid"; // Creates a unique id number to use in components. See https://www.npmjs.com/package/uniqid for more information
 import { useMyContext } from "@/store/passportStore";
+import { useEffect, useState } from "react";
+import uniqid from "uniqid"; // Creates a unique id number to use in components. See https://www.npmjs.com/package/uniqid for more information
 /* ----------------------------
 Components
 ----------------------*/
+import Confetti from './Confetti'
+import AuthHeader from './AuthHeader';
 import Cards from "./Cards";
-import AuthHeader from './AuthHeader'
 import Header from "./Header";
+import MintingModal from "./MintingModal";
 import MobileHeader from "./MobileHeader";
-import MintingModal from "./MintingModal"
 //-----------------------------------------------
 
 /*-----------------------
@@ -75,7 +75,7 @@ function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [max, setMax] = useState(false);
-  const userAddress = useMyContext().userInfo.address
+  const { showConfetti, userInfo: {address: userAddress} } = useMyContext()
   const [open, setOpen] = useState(false);
 
   // Function to get the best score from local storage as well as whether user has reached the max score attainable
@@ -85,6 +85,7 @@ function App() {
     if (yourScore) setBestScore(yourScore);
     if (maxScore) setMax(true);
   }, []);
+
 
   // Takes in the id of a card object and either sets it as selected or if it already is, dispatches game loss
   async function makeSelected(id) {
@@ -111,14 +112,6 @@ function App() {
           setOpen(true)
           resetToDefault(value)
           return
-          // Show loading modal
-          //mint nft
-          // show final nft and close modal button
-          console.log("I am minting new nft")
-          await mintNft(userAddress)
-          console.log("I finished minting a new nft")
-          resetToDefault(value);
-
         }
       }
     } else {
@@ -160,6 +153,7 @@ function App() {
 
   return (
     <div className="App bg-gray-800">
+      <Confetti />
       <MintingModal open={open} setOpen={setOpen} />
       <AuthHeader />
       <Header score={score} bestScore={bestScore} max={max} />

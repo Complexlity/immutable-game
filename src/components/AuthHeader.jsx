@@ -1,7 +1,6 @@
 'use client'
 
 import { useMyContext } from "@/store/passportStore";
-import { passport } from "@imtbl/sdk";
 import Head from "next/head";
 import { useState } from 'react';
 
@@ -9,6 +8,9 @@ export default function AuthHeader() {
   const {passportState: passportInstance, userInfo, dispatch } = useMyContext();
   const [buttonState, setButtonState] = useState('Connect Passport')
   const [isLoading, setIsLoading] = useState(false)
+  console.log(userInfo)
+
+
 
   async function login() {
     if (!passportInstance) return
@@ -99,7 +101,7 @@ export default function AuthHeader() {
       <div className="flex justify-end pr-16 gap-4 top-0 backdrop-blur-md py-4   w-full">
 
           {
-            buttonState === 'Connected'
+            buttonState === 'Connected' || userInfo?.email
             ?
 
             <>

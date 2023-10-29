@@ -7,6 +7,8 @@ import AuthHeader from '@/components/AuthHeader'
 export default function Page() {
   const router = useRouter()
   const userAddress = useMyContext().userInfo.address
+  const userEmail = useMyContext().userInfo
+
 
   let address = router.query.address
   if(!address) address = userAddress

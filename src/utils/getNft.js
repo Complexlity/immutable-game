@@ -1,7 +1,6 @@
 const { config: immutableConfig, blockchainData } = require("@imtbl/sdk");
 
 export async function getNft(tokenId) {
-tokenId = 18
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS; // The address of the deployed collection contract
 const TOKEN_ID = tokenId - 1; // The ID of the minted token
 const config = {

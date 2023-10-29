@@ -1,7 +1,7 @@
 import { useMyContext } from "@/store/passportStore";
 import { mintNft } from "@/utils/mintNft";
 import { getNft } from '@/utils/getNft';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDisclosure } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDisclosure, Link } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 
@@ -21,15 +21,17 @@ export default function MintingModal({open, setOpen}) {
       const mintNftAndSetState = async () => {
         try {
           setMinting(true)
-          const { tokenId } = await fetch('api/current-token-id').then(res => res.json())
-          console.log({tokenId})
-          setTotalMinted(tokenId)
-          setCurrentState('Minting Your Nft...')
-          const tokenMinted = await mintNft(userAddress, tokenId);
-          console.log({tokenMinted})
+          let tokenId = 4
+          // const { tokenId } = await fetch('api/current-token-id').then(res => res.json())
+          // console.log({tokenId})
+          // setTotalMinted(tokenId)
+          // setCurrentState('Minting Your Nft...')
+          // const tokenMinted = await mintNft(userAddress, tokenId);
+          // console.log({tokenMinted})
           setCurrentState("Fetching Minted Nft...");
-
+          console.log(tokenId)
           const tokenFetched = await getNft(tokenId)
+          console.log(tokenFetched)
           setNftItem(tokenFetched)
           setMinting(false);
 
@@ -54,6 +56,7 @@ export default function MintingModal({open, setOpen}) {
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={false}
+      classNames="dark"
       >
         <ModalContent>
           {(onClose) => (
@@ -91,6 +94,13 @@ export default function MintingModal({open, setOpen}) {
                         <span className="italic text-blue-900 font-bold">Total Minted</span>: {totalMinted}/100
                       </p>
                     ) : null}
+                    <Button color="success" variant="light"
+                    >
+                      <Link href={`/collection/${userAddress}`} underline="hover">
+                      View Your NFTs
+                    </Link>
+                      </Button>
+
                     <Button color="danger" variant="light" onPress={() => {
                       onClose()
                       setOpen(false)

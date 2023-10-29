@@ -5,9 +5,9 @@ export default async function handler(
   res
 ) {
   const redis = createRedisInstance();
-  const tokenId = await redis.get("token_id");
+  const tokenId = await redis.get("tokenid");
   let x = Number(tokenId) || 1;
   const y = x + 1
-  await redis.set("token_id", y);
+  await redis.set("tokenid", y);
   res.status(200).json({ tokenId: x });
 }

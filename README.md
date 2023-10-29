@@ -89,7 +89,7 @@ The contract.json file will contain the CID of the nft collection image and some
 - Copy our wallet address and get some testnet tokens from [Sepolia faucet]('https://sepoliafaucet.com/')
 - On success, Copy our metamask private key ([How to]('https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key#:~:text=On%20the%20'Account%20details'%20page,private%20key%20to%20your%20clipboard.'))
 
-5. Next, we have to use [zkEVM boilerplate repository]('https://github.com/immutable/zkevm-boilerplate') provided by the immutable team to quickly deploy the contract. The contract
+5. Next, we have to use [zkEVM boilerplate repository]('https://github.com/immutable/zkevm-boilerplate') provided by the immutable team to quickly deploy the smart contract. 
 
 6. After deploying the contract, copy the contract's hash as we would need it to be able to mint and get the NFTs on the client
 
@@ -119,14 +119,18 @@ reset the whole systems and save the highest score
 
 10.  I then added authentication using Immutable Passport as required. Here's a detailed guide I wrote about doing so - [Detailed Guide]('https://github.com/Complexlity/immutable-planner-app')
 
-11. 
+11. After doing this, I was ready to add the utility functions to the application. I took the Modal Element('https://nextui.org/docs/components/modal') from [NextUI]('https://nextui.org').
+I then made this component to render whenever an authenticated user reached the `end of game` (i.e complete the challenge clicking each card once). Using React's [useEffect Hook]('https://react.dev/reference/react/useEffect'),
+I made this component to trigger the minting and fetching whenever it shows. It takes calls the `mintNft()` function and then the `getNft()` function both of which are build on the immutable's sdk. This also takes some time so I have removed all possibities of closing midway to avoid causing unwanted behaviours
 
+12. When the items is fully minted and fetched, the user would see two buttons
 
+- `View Nfts`: For the user to see all the items they have collected so far
+- `Close`: To close the modal now that we have completed all functions
 
-### Contract Modify
+13. The view NFT page which then uses the `getNftsByAddress` function to show all the NFTs by the user
 
-### Contract Deploy
+### The Unique Token Id Problem
 
-### Client App
-
-### Unique Token Id
+Since immutable does not allow creating multiple NFTs with the same name, I have to be able to track the minted NFTs as if I create an item with say `tokenId = 1` and try to create another, it fails so I have to find a way to always increment this value each time the user.
+I created an [api route]('src/pages/api/current-token-id.js') which just statically fetches the id and updates it each time. Without using a database, this solves it

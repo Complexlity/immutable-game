@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@imtbl/sdk": "^0.22.0",
+    "@imtbl/sdk": "^0.28.0",
     "@imtbl/zkevm-contracts": "^1.2.3",
     "@magic-ext/oidc": "^1.0.1",
     "@nextui-org/react": "^2.1.13",

@@ -1,17 +1,15 @@
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import { useMyContext } from '@/store/passportStore'
-import { getNftByAddress } from '@/utils/getNftByAddress'
 import AuthHeader from '@/components/AuthHeader'
+import { getNftByAddress } from '@/utils/getNftByAddress'
+import Link from 'next/link'
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Image,
   Button,
-  Link
-} from "@nextui-org/react";
+  Card,
+  CardFooter,
+  CardHeader,
+  Image,
+} from "@nextui-org/react"
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 
 
@@ -23,7 +21,7 @@ export default function Page() {
     const getNfts = async () => {
       try {
   if (!router.isReady) return
-  const { address } = router.query
+        const { address } = router.query
         const nfts = await getNftByAddress(address)
         setNfts(nfts)
         setIsLoading(false)
@@ -89,7 +87,7 @@ function NftCard({ nft }) {
         <div>
           <p className="text-black text-base">View On Explorer</p>
         </div>
-          <Link target={"_blank"} underline="hover" href={`https://explorer.testnet.immutable.com/token/${CONTRACT_ADDRESS}/instance/${nft.token_id}`}>
+          <Link target={"_blank"} className="hover:underline" href={`https://explorer.testnet.immutable.com/token/${CONTRACT_ADDRESS}/instance/${nft.token_id}`}>
         <Button className="text-base" color="primary" radius="full" size="sm">
           Go
         </Button>

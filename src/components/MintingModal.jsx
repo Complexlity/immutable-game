@@ -1,7 +1,8 @@
+import Link from "next/link";
 import { useMyContext } from "@/store/passportStore";
 import { mintNft } from "@/utils/mintNft";
 import { getNft } from '@/utils/getNft';
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDisclosure, Link } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDisclosure,  } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
 
@@ -95,7 +96,7 @@ export default function MintingModal({open, setOpen}) {
                     ) : null}
                     <Button color="success" variant="light"
                     >
-                      <Link href={`/collection/${userAddress}`} underline="hover">
+                      <Link href={`/collection/${userAddress}`} className="hover:underline">
                       View Your NFTs
                     </Link>
                       </Button>

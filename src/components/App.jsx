@@ -103,6 +103,7 @@ function App() {
         setBestScore(score);
         if (!userAddress) {
           alert("You Attained god hood. Congratulations");
+          alert("Connect Immutable Passport!. We have exciting NFTs for you")
           resetToDefault(value);
 
         }

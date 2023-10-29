@@ -50,8 +50,8 @@ export default function Page() {
       <AuthHeader />
       <>
         {nfts.length == 0 ? <p className="text-center text-3xl">You Have No NFTs. Complete <a href="/" className="underline hover:no-underline text-amber-400">the game</a> to gain some!!</p> : null}
-        {nfts.length > 0 ? <p className="text-3xl text-center m-4">Wow!!!. You have {nfts.length} NFTs. You have what it takes to <a href="/" className="underline hover:no-underline">Win More!</a></p>: null}
-        <div className="mt-8 grid grid-cols-12 mx-auto max-w-[1000px] p-8 gap-4 justify-center">
+        {nfts.length > 0 ? <p className="text-3xl text-center m-4">Wow!!!. You have {nfts.length} NFTs. You have more easter eggs. <Link href="/" className="underline hover:no-underline">Win More!</Link></p>: null}
+        <div className="mt-8 grid grid-cols-12 mx-auto max-w-[1000px] p-8 gap-x-6 gap-y-12 justify-center">
               {
                 nfts.map((nft, index) => (
                   <NftCard nft={nft} key={index} />
@@ -80,7 +80,7 @@ function NftCard({ nft }) {
       <Image
         removeWrapper
         alt="Card example background"
-        className="z-0 w-full h-full scale-125 -translate-y-6 object-cover"
+        className="z-0 w-full h-full scale-125 hover:scale-150 -translate-y-6 object-cover"
         src={nft.image}
       />
       <CardFooter className="absolute bg-white/50 bottom-0 border-t-1 border-zinc-100/50 z-10 justify-between">

@@ -23,7 +23,7 @@ export const MyContext = createContext();
 export function MyProvider({ children }) {
   const [passportState] = useState(passportInstance ?? "");
   const [userInfo, dispatch] = useReducer(reducer, {address: null, email: null, nickname: null, idToken: null, accessToken: null})
-  const [showConfetti, setShowConfetti] = useState(true)
+  const [showConfetti, setShowConfetti] = useState(false)
 
   function reducer(state, action) {
     const key = action.key

@@ -96,7 +96,7 @@ function App() {
       setCards(allCards);
       let value = score;
       setScore(score + 1);
-      if (value === 2) {
+      if (value === 11) {
         localStorage.setItem("Max", true);
         localStorage.setItem("MemoryScore", 12);
         setMax(true);

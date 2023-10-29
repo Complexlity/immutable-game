@@ -4,11 +4,12 @@ import { mintNft } from "@/utils/mintNft";
 import { getNft } from '@/utils/getNft';
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, Progress, useDisclosure,  } from "@nextui-org/react";
 import { useEffect, useState } from "react";
+import Confetti from './Confetti'
 
 
 export default function MintingModal({ open, setOpen }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const { setShowConfetti } = useMyContext()
+  const {showConfetti, setShowConfetti } = useMyContext()
   const [currentState, setCurrentState] = useState("");
   const userAddress = useMyContext().userInfo.address
   const [minting, setMinting] = useState(false);
@@ -22,12 +23,13 @@ export default function MintingModal({ open, setOpen }) {
       const mintNftAndSetState = async () => {
         try {
           setMinting(true)
-          const { tokenId } = await fetch('api/token').then(res => res.json())
-          console.log({tokenId})
-          setTotalMinted(tokenId)
-          setCurrentState('Minting Your Nft...')
-          const tokenMinted = await mintNft(userAddress, tokenId);
-          console.log({tokenMinted})
+          let tokenId = 5
+          // const { tokenId } = await fetch('api/token').then(res => res.json())
+          // console.log({tokenId})
+          // setTotalMinted(tokenId)
+          // setCurrentState('Minting Your Nft...')
+          // const tokenMinted = await mintNft(userAddress, tokenId);
+          // console.log({tokenMinted})
           setCurrentState("Fetching Minted Nft...");
           console.log(tokenId)
           const tokenFetched = await getNft(tokenId)
@@ -59,9 +61,10 @@ export default function MintingModal({ open, setOpen }) {
         isDismissable={false}
       classNames="dark"
       >
-        <ModalContent>
+        <ModalContent classNames="!overflow-hidden">
           {(onClose) => (
             <>
+            <Confetti />
               <ModalBody>
                 <div className="grid min-h-[400px] w-full content-center items-center gap-8 text-center">
                   {minting ? (
@@ -77,12 +80,12 @@ export default function MintingModal({ open, setOpen }) {
                     </>
                   ) : (
                     <>
-                      <p>{nftItem?.name}</p>
+                      <p className="text-3xl font-bold text-blue-800 ">{nftItem?.name}</p>
                       <img
                         src={nftItem?.image}
                         className="mx-auto h-[200px] w-[200px] rounded-xl"
                       />
-                      <p>Congratulation!!!. You win a free Nft</p>
+                      <p className="text-xl"><span className="font-bold">Congratulations!!!.</span> You win an Nft</p>
                     </>
                   )}
                 </div>
@@ -97,12 +100,12 @@ export default function MintingModal({ open, setOpen }) {
                     ) : null}
                     <Button color="success" variant="light"
                     >
-                      <Link href={`/collection/${userAddress}`} className="hover:underline">
+                      <Link href={`/collection/${userAddress}`} className="hover:underline text-base">
                       View Your NFTs
                     </Link>
                       </Button>
 
-                    <Button color="danger" variant="light" onPress={() => {
+                    <Button className="text-base" color="danger" variant="light" onPress={() => {
                       onClose()
                       setOpen(false)
                       setShowConfetti(false)

@@ -7,7 +7,7 @@ export default function Confetti() {
   const { showConfetti } = useMyContext()
   return (
     <>
-      {showConfetti && <ReactConfetti width={width} height={height} />}
+      {showConfetti && <ReactConfetti />}
   </>
     )
 

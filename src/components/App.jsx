@@ -6,7 +6,6 @@ import uniqid from "uniqid"; // Creates a unique id number to use in components.
 /* ----------------------------
 Components
 ----------------------*/
-import Confetti from './Confetti'
 import AuthHeader from './AuthHeader';
 import Cards from "./Cards";
 import Header from "./Header";
@@ -97,7 +96,7 @@ function App() {
       setCards(allCards);
       let value = score;
       setScore(score + 1);
-      if (value === 2) {
+      if (value === 11) {
         localStorage.setItem("Max", true);
         localStorage.setItem("MemoryScore", 12);
         setMax(true);
@@ -108,7 +107,6 @@ function App() {
 
         }
         else {
-          console.log("I am here")
           setOpen(true)
           resetToDefault(value)
           return
@@ -153,7 +151,7 @@ function App() {
 
   return (
     <div className="App bg-gray-800">
-      <Confetti />
+
       <MintingModal open={open} setOpen={setOpen} />
       <AuthHeader />
       <Header score={score} bestScore={bestScore} max={max} />

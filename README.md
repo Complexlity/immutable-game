@@ -89,7 +89,7 @@ The contract.json file will contain the CID of the nft collection image and some
 - Copy our wallet address and get some testnet tokens from [Sepolia faucet]('https://sepoliafaucet.com/')
 - On success, Copy our metamask private key ([How to]('https://support.metamask.io/hc/en-us/articles/360015289632-How-to-export-an-account-s-private-key#:~:text=On%20the%20'Account%20details'%20page,private%20key%20to%20your%20clipboard.'))
 
-5. Next, we have to use [zkEVM boilerplate repository]('https://github.com/immutable/zkevm-boilerplate') provided by the immutable team to quickly deploy the smart contract. 
+5. Next, we have to use [zkEVM boilerplate repository]('https://github.com/immutable/zkevm-boilerplate') provided by the immutable team to quickly deploy the smart contract.
 
 6. After deploying the contract, copy the contract's hash as we would need it to be able to mint and get the NFTs on the client
 
@@ -133,4 +133,8 @@ I made this component to trigger the minting and fetching whenever it shows. It 
 ### The Unique Token Id Problem
 
 Since immutable does not allow creating multiple NFTs with the same name, I have to be able to track the minted NFTs as if I create an item with say `tokenId = 1` and try to create another, it fails so I have to find a way to always increment this value each time the user.
-I created an [api route]('src/pages/api/current-token-id.js') which just statically fetches the id and updates it each time. Without using a database, this solves it
+I created an [api route]('src/pages/api/token.js') which just statically fetches the id and updates it each time. This was done using redis for speed
+
+## Conclusion
+
+I learnt quite a lot of things carrying out this bounty. I can also affirm the easy of adding authentication and interacting with the blockchain using immutable passport especially from a web2 background. And I would definitely build with it in my future projects

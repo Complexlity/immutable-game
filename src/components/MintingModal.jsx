@@ -23,10 +23,10 @@ export default function MintingModal({ open, setOpen }) {
       const mintNftAndSetState = async () => {
         try {
           setMinting(true)
+          setCurrentState('Minting Your Nft...')
           const { tokenId } = await fetch('api/token').then(res => res.json())
           console.log({tokenId})
           setTotalMinted(tokenId)
-          setCurrentState('Minting Your Nft...')
           const tokenMinted = await mintNft(userAddress, tokenId);
           console.log({tokenMinted})
           setCurrentState("Fetching Minted Nft...");
@@ -63,7 +63,9 @@ export default function MintingModal({ open, setOpen }) {
         <ModalContent classNames="!overflow-hidden">
           {(onClose) => (
             <>
+              <div className="!max-w-full max-w-[400px]">
             <Confetti />
+            </div>
               <ModalBody>
                 <div className="grid min-h-[400px] w-full content-center items-center gap-8 text-center">
                   {minting ? (

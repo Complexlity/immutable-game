@@ -9,6 +9,7 @@ Components
 import AuthHeader from './AuthHeader';
 import Cards from "./Cards";
 import Header from "./Header";
+import NewAuthHeader from "./NewAuthHeader";
 import MintingModal from "./MintingModal";
 import MobileHeader from "./MobileHeader";
 //-----------------------------------------------
@@ -154,6 +155,7 @@ function App() {
     <div className="App bg-gray-800">
 
       <MintingModal open={open} setOpen={setOpen} />
+      <NewAuthHeader />
       <AuthHeader />
       <Header score={score} bestScore={bestScore} max={max} />
       <MobileHeader score={score} bestScore={bestScore} max={max} />

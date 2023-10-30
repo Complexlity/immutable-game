@@ -5,9 +5,11 @@ import {NextUIProvider} from "@nextui-org/react";
 export default function App({ Component, pageProps }) {
   return (
      <NextUIProvider>
-    <MyProvider>
+      <MyProvider>
+      <main className="dark text-foreground bg-background">
     <Component {...pageProps} />
-   </MyProvider>
+    </main>
+      </MyProvider>
      </NextUIProvider>
 
   )

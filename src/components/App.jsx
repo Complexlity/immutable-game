@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useMyContext } from "@/store/passportStore";
 import { useEffect, useState } from "react";
@@ -6,10 +6,9 @@ import uniqid from "uniqid"; // Creates a unique id number to use in components.
 /* ----------------------------
 Components
 ----------------------*/
-import AuthHeader from './AuthHeader';
 import Cards from "./Cards";
 import Header from "./Header";
-import NewAuthHeader from "./NewAuthHeader";
+import AuthHeader from "./AuthHeader";
 import MintingModal from "./MintingModal";
 import MobileHeader from "./MobileHeader";
 //-----------------------------------------------
@@ -75,7 +74,10 @@ function App() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [max, setMax] = useState(false);
-  const { showConfetti, userInfo: {address: userAddress} } = useMyContext()
+  const {
+    showConfetti,
+    userInfo: { address: userAddress },
+  } = useMyContext();
   const [open, setOpen] = useState(false);
 
   // Function to get the best score from local storage as well as whether user has reached the max score attainable
@@ -85,7 +87,6 @@ function App() {
     if (yourScore) setBestScore(yourScore);
     if (maxScore) setMax(true);
   }, []);
-
 
   // Takes in the id of a card object and either sets it as selected or if it already is, dispatches game loss
   async function makeSelected(id) {
@@ -104,14 +105,12 @@ function App() {
         setBestScore(score);
         if (!userAddress) {
           alert("You Attained god hood. Congratulations");
-          alert("Connect Immutable Passport!. We have exciting NFTs for you")
+          alert("Connect Immutable Passport!. We have exciting NFTs for you");
           resetToDefault(value);
-
-        }
-        else {
-          setOpen(true)
-          resetToDefault(value)
-          return
+        } else {
+          setOpen(true);
+          resetToDefault(value);
+          return;
         }
       }
     } else {
@@ -153,9 +152,7 @@ function App() {
 
   return (
     <div className="App bg-gray-800">
-
       <MintingModal open={open} setOpen={setOpen} />
-      <NewAuthHeader />
       <AuthHeader />
       <Header score={score} bestScore={bestScore} max={max} />
       <MobileHeader score={score} bestScore={bestScore} max={max} />

@@ -32,7 +32,7 @@ export default function MintingModal({ open, setOpen }) {
           console.log({tokenMinted})
           setCurrentState("Fetching Minted Nft...");
           console.log(tokenId)
-          const tokenFetched = await getNft(tokenId)
+          const tokenFetched = await getNft(tokenId -1)
           console.log(tokenFetched)
           setNftItem(tokenFetched)
           setMinting(false);

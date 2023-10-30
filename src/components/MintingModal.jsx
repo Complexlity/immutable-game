@@ -57,7 +57,7 @@ export default function MintingModal({ open, setOpen }) {
         <ModalContent classNames="!overflow-hidden">
           {(onClose) => (
             <>
-              <div className="!max-w-full max-w-[400px]">
+              <div className="!max-w-full">
             <Confetti />
             </div>
               <ModalBody>

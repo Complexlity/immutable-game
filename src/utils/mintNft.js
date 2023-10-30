@@ -13,8 +13,6 @@ if (!(PRIVATE_KEY && CONTRACT_ADDRESS && RECIPIENT_ADDRESS)) {
   throw new Error("Private Key, Contract Address, or Recipient Address missing");
   }
 
-  console.log({CONTRACT_ADDRESS, PRIVATE_KEY, RECIPIENT_ADDRESS})
-
 // Choose an ID for the new token
   const TOKEN_ID = tokenId
 
@@ -46,6 +44,5 @@ const provider = getDefaultProvider("https://rpc.testnet.immutable.com");
   const populatedTransaction = await contract.populateMint(RECIPIENT_ADDRESS, TOKEN_ID);
 
   const result = await wallet.sendTransaction(populatedTransaction);
-  console.log(result); // To get the TransactionResponse value
   return result
 };

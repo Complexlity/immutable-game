@@ -15,14 +15,9 @@ export default function AuthHeader() {
     setButtonState("Connecting...")
     setIsLoading(true)
     try {
-      console.log("I am connecting now")
       const providerZkevm = passportInstance.connectEvm()
-      console.log(providerZkevm)
-      console.log(passportInstance)
 
       const accounts = await providerZkevm.request({ method: "eth_requestAccounts" })
-
-      console.log(accounts)
 
       // Set the address
       dispatch({
@@ -68,10 +63,9 @@ export default function AuthHeader() {
       })
 
     } catch (error) {
-    console.log("Something went wrong")
+    alert("Something went wrong. Please try again")
         console.log({ error })
         setButtonState('Connect Passport')
-          throw error
     } finally {
       setIsLoading(false)
     }

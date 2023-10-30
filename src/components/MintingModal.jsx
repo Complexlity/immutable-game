@@ -16,8 +16,6 @@ export default function MintingModal({ open, setOpen }) {
   const [nftItem, setNftItem] = useState({})
   const [totalMinted, setTotalMinted] = useState('')
 
-  console.log({userAddress})
-
   useEffect(() => {
     if (open) {
       const mintNftAndSetState = async () => {
@@ -25,15 +23,10 @@ export default function MintingModal({ open, setOpen }) {
           setMinting(true)
           setCurrentState('Getting A Unique Token Id...')
           const { tokenId } = await fetch('api/token').then(res => res.json())
-          console.log({tokenId})
           setCurrentState('Minting Your NFT...')
-          setTotalMinted(tokenId)
           const tokenMinted = await mintNft(userAddress, tokenId);
-          console.log({tokenMinted})
           setCurrentState("Fetching Minted Nft...");
-          console.log(tokenId)
           const tokenFetched = await getNft(tokenId - 1)
-          console.log(tokenFetched)
           setNftItem(tokenFetched)
           setMinting(false);
           setShowConfetti(true)

@@ -20,7 +20,6 @@ try {
     tokenId: TOKEN_ID,
   });
 
-  console.log(response.result);
   return response.result;
 } catch (error) {
     console.log(error)

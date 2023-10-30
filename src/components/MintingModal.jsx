@@ -23,9 +23,10 @@ export default function MintingModal({ open, setOpen }) {
       const mintNftAndSetState = async () => {
         try {
           setMinting(true)
-          setCurrentState('Minting Your Nft...')
+          setCurrentState('Getting A Unique Token Id...')
           const { tokenId } = await fetch('api/token').then(res => res.json())
           console.log({tokenId})
+          setCurrentState('Minting You NFT...')
           setTotalMinted(tokenId)
           const tokenMinted = await mintNft(userAddress, tokenId);
           console.log({tokenMinted})

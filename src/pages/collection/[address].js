@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react"
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Redirect from '@/components/Redirect'
 
 
 
@@ -47,6 +48,7 @@ export default function Page() {
 
   return (
     <div className='bg-gray-800 min-h-screen text-white '>
+      <Redirect />
       <AuthHeader />
       <>
         {nfts.length == 0 ? <p className="text-center text-3xl">You Have No NFTs. Complete <Link href="/" className="underline hover:no-underline text-amber-400">the game</Link> to gain some!!</p> : null}
@@ -60,7 +62,7 @@ export default function Page() {
               ))
               }
         </div>
-        <p>Note: It might some time (about a minute) for the transactions to process. If you don't see your NFT. Wait a minute and refresh the page</p>
+
           </>
     </div >
 

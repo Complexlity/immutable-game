@@ -18,7 +18,7 @@ export default function Page() {
         const { address } = router.query;
         const nfts = await getNftByAddress(address);
       if(!nfts) router.push('/')
-        setNfts([]);
+        setNfts(nfts);
         setIsLoading(false);
       } catch (error) {
         console.log(error);

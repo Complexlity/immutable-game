@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function AuthHeader() {
   const {passportState: passportInstance, userInfo, dispatch } = useMyContext();
-  const [buttonState, setButtonState] = useState('Connect Passport')
+  const [buttonState, setButtonState] = useState(userInfo?.email ? "Logout" : "Connect Passport")
   const [isLoading, setIsLoading] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 

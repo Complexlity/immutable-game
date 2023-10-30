@@ -49,8 +49,8 @@ export default function Page() {
     <div className='bg-gray-800 min-h-screen text-white '>
       <AuthHeader />
       <>
-        {nfts.length == 0 ? <p className="text-center text-3xl">You Have No NFTs. Complete <a href="/" className="underline hover:no-underline text-amber-400">the game</a> to gain some!!</p> : null}
-        {nfts.length == 1 ? <p className="text-center text-3xl">Good job!. There's a lot more <a href="/" className="underline hover:no-underline text-amber-400">to win</a> </p> : null}
+        {nfts.length == 0 ? <p className="text-center text-3xl">You Have No NFTs. Complete <Link href="/" className="underline hover:no-underline text-amber-400">the game</Link> to gain some!!</p> : null}
+        {nfts.length == 1 ? <p className="text-center text-3xl">Good job!. There's a lot more <Link href="/" className="underline hover:no-underline text-amber-400">to win</Link> </p> : null}
         {nfts.length > 1 ? <p className="text-3xl text-center m-4">Wow. You have {nfts.length} NFTs!. We have more easter eggs for you. <Link href="/" className="underline hover:no-underline">Win More!</Link></p>: null}
         <div className="mt-8 grid grid-cols-12 mx-auto max-w-[1000px] p-8 gap-x-6 gap-y-12 justify-center">
               {
@@ -60,6 +60,7 @@ export default function Page() {
               ))
               }
         </div>
+        <p>Note: It might some time (about a minute) for the transactions to process. If you don't see your NFT. Wait a minute and refresh the page</p>
           </>
     </div >
 

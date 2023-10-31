@@ -80,7 +80,7 @@ export default function MintingModal({ open, setOpen }) {
                         src={nftItem?.image}
                         className="mx-auto h-[200px] w-[200px] rounded-xl"
                       />
-                      <p className="text-xl"><span className="font-bold">Congratulations!!!.</span> You win an Nft</p>
+                        <p className="text-xl">{nftItem?.description}</p>
                     </>
                   )}
                 </div>

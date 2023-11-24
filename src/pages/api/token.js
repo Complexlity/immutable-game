@@ -1,6 +1,6 @@
 import { createRedisInstance } from "@/utils/redis";
 
-const KEY_PREFIX = "TOKEN_ID"
+const KEY_PREFIX = "TOKEN_ID1"
 
 export default async function handler(
   req,

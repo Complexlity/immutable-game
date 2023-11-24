@@ -7,6 +7,11 @@ const cids = [
   "QmRCJuaGXd1YbgxWHMZFGRyGMgjiSSrDhZYmEt2Ukvz1RD",
   "QmThUbV2EkLdh1LX1tkyaNJSRFFfRSF6MEn29McCXchugo",
   "QmYgY1ijbbPFLGFT6RS7vWmp2wT4uCP2AHyMwpt89EjcCU",
+  "QmVDNzNbxYyguxoBjJXEd3P7zvBaCnXadSBJQPPmQ42Vj8",
+  "QmXPTZh4ojzFwbbRgSAwQ9wERUuJyiMjhJ1vpUHoUQrjZu",
+  "QmTqN4k7WnESCgqiqH7QfwapMJ52AkxFMTZtf1EiufR6fg",
+  "QmQKuwrNb1ZktFafFiwBNHu9zxPZUDGZ2j4oHc8W8M5Q4A",
+  "QmPzy1pj8swAVBfVmfJZWnsmbWB6kp7R2DdivTMJdSxx6U",
 ];
 
 function generateRandomCID() {

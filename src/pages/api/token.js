@@ -8,8 +8,8 @@ export default async function handler(
 ) {
   const redis = createRedisInstance();
   const tokenId = await redis.get(KEY_PREFIX);
-  let x = Number(tokenId) || 1;
-  const y = x + 1
-  await redis.set(KEY_PREFIX, y);
-  res.status(200).json({ tokenId: x });
+  let currentTokenId = Number(tokenId) || 1;
+  const incrementedTokenId = currentTokenId + 1
+  await redis.set(KEY_PREFIX, incrementedTokenId);
+  res.status(200).json({ tokenId: currentTokenId });
 }

@@ -1,6 +1,5 @@
 const { getDefaultProvider, Wallet } = require("ethers"); // ethers v5
-const { ERC721MintByIDClient } = require("@imtbl/zkevm-contracts");
-
+const { ERC721MintByIDClient } = require("@imtbl/contracts");
 
 export async function mintNft(userAddress, tokenId) {
 const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
@@ -41,7 +40,14 @@ const provider = getDefaultProvider("https://rpc.testnet.immutable.com");
   // Rather than be executed directly, contract write functions on the SDK client are returned
   // as populated transactions so that users can implement their own transaction signing logic.
 
-  const populatedTransaction = await contract.populateMint(RECIPIENT_ADDRESS, TOKEN_ID);
+  const populatedTransaction = await contract.populateMint(
+    RECIPIENT_ADDRESS,
+    TOKEN_ID,
+    {
+      maxPriorityFeePerGas: 101e9,
+      maxFeePerGas: 102e9,
+    }
+  );
 
   const result = await wallet.sendTransaction(populatedTransaction);
   return result

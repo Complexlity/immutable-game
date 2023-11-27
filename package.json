@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@imtbl/contracts": "^2.0.0",
     "@imtbl/sdk": "^0.28.0",
     "@imtbl/zkevm-contracts": "^1.2.3",
     "@magic-ext/oidc": "^1.0.1",

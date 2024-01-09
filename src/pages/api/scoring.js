@@ -6,8 +6,16 @@ import Cors from "cors";
 const KEY_PREFIX = process.env.SCORE_KEY_PREFIX
 const cors = Cors({
   methods: ['POST', 'GET', 'HEAD'],
-  origin: '*'
+  origin: customOrigin
 })
+
+const customOrigin = function (origin, callback) {
+  if (!origin || origin.includes("stackup-invaders") || origin.includes("localhost")) {
+    callback(null, true);
+  } else {
+    callback(new Error("Not allowed by CORS"));
+  }
+};
 
 function runMiddleware(
   req,

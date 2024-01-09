@@ -47,12 +47,28 @@ await runMiddleware(req, res, cors)
       return res.status(500).json({ status: 500, message: "Some credential values missing or invalid" })
     }
     if (body.score > currentHighestScore) {
-      await redis.set(KEY_PREFIX, body.score);
-      return res.status(200).json({ status: 200, success: true, message: "Congratulations. Your Got The Highest Score" })
+      const hashed = {score: body.score, userAddress: body.address}
+      try {
+        await redis.hset("highestScore", hashed);
+        return res.status(200).json({ status: 200, message: hashed });
+      } catch (error) {
+        console.log(error);
+        return res
+          .status(500)
+          .json({ status: 500, message: "Something went wrong" });
+      }
     }
     else {
       return res.status(200).json({ status: 200, success: false, message: `Sorry ${body.email} you didn't beat the highest score yet` })
     }
   }
-  return res.status(200).json({ highestScore: currentHighestScore })
+  else {
+    try {
+			const hashed = await redis.hgetall('highestScore')
+			return res.status(200).json({ status: 200, message: hashed })
+			} catch (error) {
+			console.log(error)
+			return res.status(500).json({status:500, message: "Something went wrong"})
+		}
+  }
 }

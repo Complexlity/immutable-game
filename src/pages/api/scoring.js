@@ -5,17 +5,12 @@ import Cors from "cors";
 
 const KEY_PREFIX = process.env.SCORE_KEY_PREFIX
 const cors = Cors({
-  methods: ['POST', 'GET', 'HEAD'],
-  origin: customOrigin
-})
-
-const customOrigin = function (origin, callback) {
-  if (!origin || origin.includes("stackup-invaders") || origin.includes("localhost")) {
-    callback(null, true);
-  } else {
-    callback(new Error("Not allowed by CORS"));
-  }
-};
+  methods: ["POST", "GET", "HEAD"],
+  origin: [
+    "http://localhost:5500",
+    "https://stackup-invaders.vercel.app"
+  ],
+});
 
 function runMiddleware(
   req,

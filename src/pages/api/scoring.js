@@ -37,19 +37,29 @@ await runMiddleware(req, res, cors)
 
 
   const redis = createRedisInstance();
-  let currentHighestScore = await redis.get(KEY_PREFIX);
-  currentHighestScore = Number(currentHighestScore) || 0;
+  let currentHighestScoreObject = await redis.hgetall(KEY_PREFIX);
+    const currentHighestScore = Number(currentHighestScoreObject.score) || 0;
 
   if (req.method === 'POST') {
     const body = req.body
-    const scoreIsNumber = typeof body.score == 'number' && !isNaN(body.score)
-    if (!body.email || !body.address || !scoreIsNumber || !isAddress(body.address)) {
-      return res.status(500).json({ status: 500, message: "Some credential values missing or invalid" })
+    const scoreIsNumber = (value) =>  typeof value == 'number' && !isNaN(value)
+
+    if (
+      !scoreIsNumber(body.score) ||
+      !body.userAddress ||
+      !isAddress(body.userAddress)
+    ) {
+      return res
+        .status(500)
+        .json({
+          status: 500,
+          message: "Some credential values missing or invalid",
+        });
     }
     if (body.score > currentHighestScore) {
-      const hashed = {score: body.score, userAddress: body.address}
+      const hashed = {score: body.score, userAddress: body.userAddress}
       try {
-        await redis.hset("highestScore", hashed);
+        await redis.hset(KEY_PREFIX, hashed);
         return res.status(200).json({ status: 200, message: hashed });
       } catch (error) {
         console.log(error);
@@ -59,19 +69,14 @@ await runMiddleware(req, res, cors)
       }
     }
     else {
-      return res.status(200).json({ status: 200, success: false, message: `Sorry ${body.email} you didn't beat the highest score yet` })
+      return res.status(200).json({ status: 200, success: false, message: `Sorry ${body.address} you didn't beat the highest score yet` })
     }
   }
   else {
     try {
-      let hashed = await redis.hgetall(KEY_PREFIX)
-      if (!hashed.score || !hashed.userAddress) {
-        hashed = { score: 0, userAddress: "" }
-      }
-
         return res.status(200).json({
         status: 200, message:
-          hashed
+          currentHighestScoreObject
       })
 			} catch (error) {
 			console.log(error)

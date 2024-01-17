@@ -64,9 +64,12 @@ await runMiddleware(req, res, cors)
   }
   else {
     try {
-      const hashed = await redis.hgetall(KEY_PREFIX) ||
-        { score: 0, userAddress: "" }
-      return res.status(200).json({
+      let hashed = await redis.hgetall(KEY_PREFIX)
+      if (!hashed.score || !hashed.userAddress) {
+        hashed = { score: 0, userAddress: "" }
+      }
+
+        return res.status(200).json({
         status: 200, message:
           hashed
       })

@@ -64,11 +64,17 @@ await runMiddleware(req, res, cors)
   }
   else {
     try {
-			const hashed = await redis.hgetall('highestScore')
-			return res.status(200).json({ status: 200, message: hashed })
+      const hashed = await redis.hgetall(KEY_PREFIX) ||
+        { score: 0, userAddress: "" }
+      return res.status(200).json({
+        status: 200, message:
+          hashed
+      })
 			} catch (error) {
 			console.log(error)
-			return res.status(500).json({status:500, message: "Something went wrong"})
+      return res.status(500).json({
+        status: 500, message: "Something went wrong"
+      })
 		}
   }
 }

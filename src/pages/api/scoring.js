@@ -8,7 +8,8 @@ const cors = Cors({
   methods: ["POST", "GET", "HEAD"],
   origin: [
     "http://localhost:5500",
-    "https://stackup-invaders.vercel.app"
+    "https://stackup-invaders.vercel.app",
+    "https://stackup-invaders.netlify.app"
   ],
 });
 
